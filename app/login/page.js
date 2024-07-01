@@ -1,16 +1,17 @@
 "use client"
+import { signIn, useSession } from "next-auth/react";
 import Head from 'next/head';
-import { useSession, signIn, signOut } from "next-auth/react"
+import Image from "next/image";
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
 
     const { data: session } = useSession()
     console.log(session)
     if(session) {
-      return <>
-        Signed in as {session.user.email} <br/>
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
+        const router=useRouter()
+        router.push('/dashboard')
+      
     }
    
     return (
@@ -22,34 +23,34 @@ export default function Login() {
 
             <button className="flex items-center bg-white border rounded-lg shadow-md w-64 p-2 mb-2 text-gray-800 hover:bg-gray-200">
                 <div className="h-6 w-6 mr-2" >
-                    <img src="/google.png" alt="google" />
+                    <Image width={20} height={20} src="/google.png" alt="google" />
                 </div>
                 <span>Continue with Google</span>
             </button>
 
             <button className="flex items-center bg-white border rounded-lg shadow-md w-64 p-2 mb-2 text-gray-800 hover:bg-gray-200">
                 <div className="h-6 w-6 mr-2" >
-                    <img src="/linkedin.png" alt="linkedin" />
+                    <Image width={20} height={20} src="/linkedin.png" alt="linkedin" />
                 </div>
                 <span>Continue with LinkedIn</span>
             </button>
 
             <button className="flex items-center bg-white border rounded-lg shadow-md w-64 p-2 mb-2 text-gray-800 hover:bg-gray-200">
                 <div className="h-6 w-6 mr-2" >
-                    <img src="/twitter.png" alt="twitter" />
+                    <Image width={20} height={20} src="/twitter.png" alt="twitter" />
                 </div>
                 <span>Continue with Twitter</span>
             </button>
 
             <button className="flex items-center bg-white border rounded-lg shadow-md w-64 p-2 mb-2 text-gray-800 hover:bg-gray-200">
-                <div className="h-6 w-6 mr-2" >
-                    <img src="/facebook.png" alt="facebook" />
+                <div className="h-6 w-6 mr-2" > 
+                    <Image width={20} height={20} src="/facebook.png" alt="facebook" />
                 </div>
                 <span>Continue with Facebook</span>
             </button>
             <button onClick={() => signIn("github")} className="flex items-center bg-white border rounded-lg shadow-md w-64 p-2 mb-2 text-gray-800 hover:bg-gray-200">
                 <div className="h-6 w-6 mr-2" >
-                    <img src="/Github.png" alt="facebook" />
+                    <Image width={20} height={20} src="/Github.png" alt="facebook" />
                 </div>
                 <span>Continue with GitHub</span>
             </button>
