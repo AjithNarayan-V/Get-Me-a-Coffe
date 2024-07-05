@@ -29,7 +29,7 @@ const Navbar = () => {
                             type="button"
                         >
                             <div className="w-6 mx-2 rounded-full">
-                                <Image width={25} height={25}  src={session.user.image } alt="Image  " />
+                                <Image width={25} height={25}  src={session.user.image } alt="Image  " unoptimized/>
                             </div>
                             Account
                             <svg
@@ -70,10 +70,10 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <Link
-                                        href="#"
+                                        href={`/${session.user.name}`}
                                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                     >
-                                        Settings
+                                        Your Page
                                     </Link>
                                 </li>
                                 <li>
