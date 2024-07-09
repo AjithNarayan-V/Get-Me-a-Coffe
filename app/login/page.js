@@ -9,15 +9,6 @@ export default function Login() {
     const { data: session } = useSession()
     const router = useRouter()
 
-    console.log(session)
-
-    // useEffect(() => {
-    //     if(session) {
-    //         router.push('/dashboard')
-    //         return null;
-    //     }
-    // }, [session, router])
-
     useEffect(() => {
         document.title= `Login-Get Me A Chai`,
       document.description= `Login-Get Me A Chai`

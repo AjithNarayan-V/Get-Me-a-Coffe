@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className='bg-[#0a0909] flex justify-around  text-white h-14 items-center'>
+            <nav className='bg-[#0a0909] flex justify-around  text-white h-14 items-center relative'>
                 <Link href={'/'}>
                     <div className='logo font-bold flex justify-start items-center text-2xl'>GetMeaChai!<span><Image height={40}  src="/tea.gif" alt="tea" width={40} /></span></div></Link>
 

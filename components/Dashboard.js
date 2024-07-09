@@ -36,7 +36,6 @@ const Dashboard = () => {
         let user = await fetchUser(session.user.name);
         if (user) {
           setForm(user);
-          console.log("setform", user);
         } else {
           console.log("User not found");
         }
@@ -45,7 +44,7 @@ const Dashboard = () => {
       }
     }
   };
-  
+
 
   useEffect(() => {
     getdata();
@@ -65,44 +64,14 @@ const Dashboard = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prevState => ({ ...prevState, [name]: value }));
-    console.log({ ...form, [name]: value });
+    // console.log({ ...form, [name]: value });
   };
 
-  // const handleSubmit=async(e)=>{
-  //   // e.preventDefault();
-  //   update();
-  //   let a=await updateProfile(e,session.user.name)
-  //   alert("profile updated")
-  // }
-
-  // const handleSubmit = async (e) => {   chack point 1
-  //   e.preventDefault();  // Prevent default form submission
-  //   try {
-  //     console.log("b-username", session.user.name)
-  //     console.log("b-form", form)
-  //     await updateProfile(form, session.user.name);
-  //     toast('Profile updated !', {
-  //       position: "top-right",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //       transition: Bounce,
-  //     });
-  //     // alert("Profile updated");
-  //   } catch (error) {
-  //     console.error("Error updating profile:", error);
-  //     alert("Failed to update profile");
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await updateProfile(form, session.user.name);
-      session.user.name=form.username
+      session.user.name = form.username
       // alert(session.user.name) 
       // console.log(session.user.name);
       toast('Profile updated!', {
@@ -130,8 +99,8 @@ const Dashboard = () => {
         transition: Bounce,
       });
     }
-  };  
-  
+  };
+
 
   const handleDonate = () => {
     // Handle the donation logic here 
@@ -170,9 +139,9 @@ const Dashboard = () => {
     }
     `;
 
-    const isValidURL = (url) => {
-      return url && (url.startsWith('/') || url.startsWith('http://') || url.startsWith('https://'));
-    };
+  const isValidURL = (url) => {
+    return url && (url.startsWith('/') || url.startsWith('http://') || url.startsWith('https://'));
+  };
 
   return (
     <>
@@ -190,10 +159,10 @@ const Dashboard = () => {
       />
       {/* Same as */}
       <ToastContainer />
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center m-6 md:m-0">
 
         <h1 >Welcome,!</h1>
-        <p className="mb-10">This is your personal dashboard where you can view and manage your donations.</p>
+        <p className="mb-10 sm:mx-4">This is your personal dashboard where you can view and manage your donations.</p>
         <ProfileCard className="text-white">
           <div className="flex justify-center"><img className="rounded-full" width={95} height={95} src={isValidURL(form.profilepic) ? form.profilepic : "/work.png"} alt="profile" />
           </div>
@@ -203,7 +172,7 @@ const Dashboard = () => {
           <DonateButton onClick={handleDonate}>Donate</DonateButton>
         </ProfileCard>
       </div>
-      <div className="detalisCollection  w-full">
+      <div className="detalisCollection  md:w-full m-6 md:m-0 ">
         <form onSubmit={handleSubmit} className="mx-auto max-w-lg flex flex-col gap-2" >
           <div>
             <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>

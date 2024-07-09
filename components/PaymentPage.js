@@ -47,29 +47,28 @@ const PaymentPage = ({ username }) => {
             ...prevState,
             [name]: value
         }));
-        console.log({ ...paymentform, [name]: value });
+        // console.log({ ...paymentform, [name]: value });
     }
 
     const getData = async () => {
-        console.log("User name==",username)
         let user = await fetchUser(username);
         setCurrentUser(user);
         let payment = await fetchPayment(username)
         setpayment(payment);
-        console.log(user, payment);
+        // console.log(user, payment);
     }
 
     const pay = async (amount) => {
         try {
             // Log payment initiation data
-            console.log('Initiating payment with:', { amount, username, paymentform });
+            // console.log('Initiating payment with:', { amount, username, paymentform });
 
             // Get the order id from the initiate function
             let response = await initiate(amount, username, paymentform);
             let orderId = response.id;
 
             // Log the received orderId
-            console.log('Received orderId:', orderId);
+            // console.log('Received orderId:', orderId);
 
             // Configure Razorpay options
             var options = {
@@ -142,8 +141,8 @@ const PaymentPage = ({ username }) => {
             {/* Same as */}
             <ToastContainer />
             <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
-            <div className=" bg-cover bg-center h-screen flex flex-col gap-2 justify-center items-center" style={{ backgroundImage: `url('/background.jpg')` }}>
-                <h1 className=" mt-5 font-bold text-center p-4 text-2xl">Your profile </h1>
+            <div className=" bg-cover bg-center h-screen flex flex-col gap-2 justify-center items-center relative" style={{ backgroundImage: `url('/background.jpg')` }}>
+                <h1 className=" mt-5 font-bold text-center p-4 text-2xl top-10  ">Your profile </h1>
                 {session && session.user && (
                     <div className="mx-2 rounded-full ">
                         {session.user.image && (
@@ -162,8 +161,8 @@ const PaymentPage = ({ username }) => {
                     @{username}
                 </div>
 
-                <div className="flex  gap-5 w-[80%]  mb-2">
-                    <div className="bg-black bg-opacity-80 rounded-lg text-center w-1/2  flex flex-col gap-2 p-10  ">
+                <div className="flex  gap-5 w-full md:w-[80%]  mb-2 flex-col justify-center items-center md:flex-row">
+                    <div className="bg-black bg-opacity-80 rounded-lg text-center w-[80%] md:w-1/2   flex flex-col gap-2 p-10  ">
                         <h2 className='mb-5 '>Supporters</h2>
                         {payment.map((p, i) => {
                             return <div key={i} className='flex'><Image width={25} height={20} src={"/work.png"} alt='profile' /><p>{p.name} Donated <span className="font-bold">₹{p.amount} </span> with a message {p.message}</p></div>
@@ -172,7 +171,7 @@ const PaymentPage = ({ username }) => {
 
 
                     </div>
-                    <div className="bg-black bg-opacity-80 rounded-lg text-center w-1/2   p-10">
+                    <div className="bg-black bg-opacity-80 rounded-lg text-center w-[80%] h-full md:w-1/2 mb-10   p-10">
                         <h2 className='pb-5'>Make a payment</h2>
                         <input onChange={handleChange} value={paymentform.name} name='name' type="text" id='username' className='rounded-md  w-full bg-gray-800 bg-opacity-50 p-2 m-1.5' placeholder='Enter your name' />
                         <input onChange={handleChange} value={paymentform.message} name='message' type="text" id='message' className='rounded-md w-full bg-gray-800 bg-opacity-50 p-2 m-1.5' placeholder='Enter the message' />
@@ -186,7 +185,7 @@ const PaymentPage = ({ username }) => {
                         </div>
                     </div>
                 </div>
-
+                        
 
             </div>
         </>)

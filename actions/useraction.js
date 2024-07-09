@@ -17,7 +17,7 @@ export const initiate = async (amount, to_username, Paymentform) => {
     }
 
     let x = await instance.orders.create(options)
-    console.log('Order created:', x);
+    // console.log('Order created:', x);
 
     //create a payment object that show pending orders
     await Payment.create({ oid: x.id, amount: amount / 100, to_user: to_username, name: Paymentform.name, message: Paymentform.message })
@@ -40,7 +40,7 @@ export const fetchUser = async (username) => {
       return null;
     }
     user = user.toObject({ flattenObjectIds: true });
-    console.log("userdata:", user);
+    // console.log("userdata:", user);
     return user;    
   };
 
@@ -48,7 +48,7 @@ export const fetchPayment = async (username) => {
     await connectDB()
     //find all the payment sorted by decreasing order of amount and flatte
     let payments = await Payment.find({ done: "true" ,to_user:username}).sort({ amount: -1 }).limit(10).lean()
-    console.log("paymentdata:", payments)
+    // console.log("paymentdata:", payments)
     return payments
 }
 
@@ -63,16 +63,12 @@ export const updateProfile = async (data, oldusername) => {
         if (check) {
             throw new Error("Username already exists")
         }
-        console.log("b2-data:", data)
         await User.updateOne({ email: data.email }, data)
-        console.log("a-data:", data)
         await Payment.updateMany({to_user:oldusername}, {to_user:data.username})
         
-        console.log("paymentdata:", Payment)
     }
     else{
         await User.updateOne({ email: data.email }, data)
-        console.log("normal-data:", User)
 
     }
 
